@@ -8,7 +8,11 @@
 # 1. Project paths
 # ------------------------------------------------------------
 
-project_path <- "D:/Rproject/6400-blog8"
+project_path <- if (basename(getwd()) == "code") {
+  normalizePath("..", winslash = "/", mustWork = FALSE)
+} else {
+  normalizePath(".", winslash = "/", mustWork = FALSE)
+}
 
 figure_path <- file.path(
   project_path,
