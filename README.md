@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This repository contains the code and figure outputs for a simulation-based statistics project focused on statistical inference. The analysis uses repeated sampling and resampling to make core ideas such as bootstrap confidence intervals, coverage, and hypothesis testing easier to interpret.
+This repository contains the code and figure outputs for a simulation-based statistics project focused on statistical inference. The analysis uses repeated sampling and resampling to make core ideas in inference concrete: how uncertainty is estimated, how confidence intervals behave over repeated samples, and how hypothesis tests compare observed evidence against a null model.
 
 The project assumes a population with mean 50 and standard deviation 10, then repeatedly draws samples of size 50. Using simulation, it demonstrates:
 
@@ -14,9 +14,9 @@ All analyses are implemented in R and generate plots in the `figure/` directory,
 
 ## Introduction
 
-Statistical inference is about learning something about a population from a sample. Concepts such as confidence intervals and p-values can be difficult to understand from formulas alone. This project addresses that difficulty by simulating the data-generating process repeatedly and visualizing the results.
+Statistical inference is about learning something about a population from a sample. Concepts such as confidence intervals and p-values can be difficult to understand from formulas alone. This project uses simulation to make those ideas more tangible.
 
-Rather than relying only on theory, the project asks: what happens when we repeatedly generate samples and resample them? By doing so, we can connect simulation results to the logic of statistical uncertainty.
+Rather than relying only on theory, the project asks: what happens when we repeatedly generate samples and resample them? By doing so, we can connect simulation results to the logic of statistical inference.
 
 The project uses a synthetic population with mean 50 and standard deviation 10. It repeatedly draws samples of size 50 and then uses bootstrap methods to approximate the sampling distribution of the sample mean.
 
@@ -61,7 +61,7 @@ $$
 Z = \frac{\bar{X} - \mu_0}{\sigma / \sqrt{n}}
 $$
 
-The code simulates many values of Z under the null hypothesis, builds the empirical null distribution, identifies the rejection region for a two-sided 5% test, and calculates a simulated p-value for an observed statistic.
+The code simulates many values of Z under the null hypothesis, builds the empirical null distribution, identifies the rejection region for a two-sided 5% test, and calculates a simulated p-value for the observed statistic.
 
 This connects the concepts of:
 
@@ -88,7 +88,7 @@ Zhengyang_Ding_AEDS6400_blog8/
 │   ├── coverage_simulation.png
 │   ├── null_distribution.png
 │   └── p_value.png
-└── .Rproj.user/   # optional local RStudio metadata
+└── .Rproj.user/
 ```
 
 ### Script descriptions
@@ -102,21 +102,9 @@ Zhengyang_Ding_AEDS6400_blog8/
 
 ### 1. Open the project in RStudio or start an R session
 
-Clone or open the repository in RStudio. The project file `Zhengyang_Ding_AEDS6400_blog8.Rproj` is included for convenience.
+Open the repository in RStudio, or start an R session in the project directory. The project file `Zhengyang_Ding_AEDS6400_blog8.Rproj` is included for convenience.
 
-### 2. No manual project path update is required
-
-The R scripts were revised to detect the working directory automatically. They determine whether they are being run from the repository root or from the `code/` folder and then create or use the correct output directory.
-
-This means the scripts are designed to work directly from the GitHub repository structure without hard-coded local paths such as:
-
-```r
-project_path <- "D:/Rproject/6400-blog8"
-```
-
-Instead, each script uses a relative path structure that is portable across machines and GitHub repositories.
-
-### 3. Run the analysis scripts in order
+### 2. Run the analysis scripts in order
 
 From the repository root, run:
 
@@ -127,17 +115,7 @@ source("code/analysis_3.R")
 source("code/interactive_bootstrap.R")
 ```
 
-If you prefer to run them from inside the `code/` folder, you can also do:
-
-```r
-setwd("code")
-source("analysis_1.R")
-source("analysis_2.R")
-source("analysis_3.R")
-source("interactive_bootstrap.R")
-```
-
-### 4. View the outputs
+### 3. View the outputs
 
 The generated files are saved in the `figure/` directory:
 
@@ -151,12 +129,12 @@ Open `figure/bootstrap_interactive.html` in a browser to explore how the bootstr
 
 ## Expected Interpretation
 
-This project is intended to show that statistical inference is not just a set of formulas; it is a process that can be understood through repeated simulation. By generating many samples and resampling them, the code helps make the logic of uncertainty visible.
+This project is intended to show that statistical inference is not just a set of formulas; it is a process that can be understood through repeated simulation. By generating many samples and resampling them, the project makes visible the logic behind confidence intervals and hypothesis tests.
 
-The key takeaway is that simulation helps explain why a 95% confidence interval is interpreted in terms of long-run coverage and why a p-value is understood as a tail probability under the null hypothesis. These ideas are often abstract in symbolic form, but become much more accessible when represented through repeated simulation and visualization.
+The key takeaway is that simulation helps explain why a 95% confidence interval is interpreted in terms of long-run coverage and why a p-value is understood as a tail probability under the null hypothesis.
 
 ## Summary
 
-This repository demonstrates the core ideas behind statistical inference using simulation, visualization, and interactive exploration. It is a compact, reproducible example of how bootstrap resampling and null-distribution simulations can be used to understand uncertainty in estimation and testing.
+This repository demonstrates the core ideas behind statistical inference using simulation, visualization, and interactive exploration. It is a compact, reproducible example of how bootstrap resampling and repeated sampling can be used to connect theory to intuition.
 
-The scripts are structured to run from the project repository itself, so they are well-suited for GitHub-based distribution and reproducible analysis without local machine-specific path dependencies.
+The scripts are organized for direct execution within the repository and are well-suited for GitHub-based distribution and reproducible analysis.
