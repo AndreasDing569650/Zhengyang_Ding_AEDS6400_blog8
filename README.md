@@ -2,27 +2,27 @@
 
 ## Project Overview
 
-This repository contains the code and visual outputs for a simulation-based statistics blog post on statistical inference. The project is designed to make abstract ideas such as bootstrap confidence intervals, interval coverage, null distributions, rejection regions, and p-values more intuitive by repeatedly generating data and observing how sampling variability behaves.
+This repository contains the code and figure outputs for a simulation-based statistics project focused on statistical inference. The analysis uses repeated sampling and resampling to make core ideas such as bootstrap confidence intervals, coverage, and hypothesis testing easier to interpret.
 
-The analysis focuses on a simple setup in which a population is assumed to have mean 50 and standard deviation 10. Using repeated sampling and resampling, the project demonstrates:
+The project assumes a population with mean 50 and standard deviation 10, then repeatedly draws samples of size 50. Using simulation, it demonstrates:
 
 1. how a bootstrap confidence interval is constructed;
 2. whether a 95% confidence procedure achieves approximately 95% coverage in repeated samples; and
 3. how a hypothesis test compares an observed test statistic to a null distribution.
 
-This project is written in R and produces a set of figures and an interactive HTML visualization that can be opened directly in a browser.
+All analyses are implemented in R and generate plots in the `figure/` directory, along with an interactive HTML visualization that can be opened in a browser.
 
 ## Introduction
 
-Statistical inference is about learning something about a population from a sample. However, ideas such as confidence intervals and p-values can be difficult to understand from formulas alone. Simulation provides an intuitive way to see how these ideas work by generating repeated samples and observing the distributions that result.
+Statistical inference is about learning something about a population from a sample. Concepts such as confidence intervals and p-values can be difficult to understand from formulas alone. This project addresses that difficulty by simulating the data-generating process repeatedly and visualizing the results.
 
-Rather than relying only on theory, this project asks: what happens when we repeatedly simulate the data-generating process? By doing so, we can visually connect the concepts of sampling variation, uncertainty, and statistical decision-making.
+Rather than relying only on theory, the project asks: what happens when we repeatedly generate samples and resample them? By doing so, we can connect simulation results to the logic of statistical uncertainty.
 
-The project uses a population with mean 50 and standard deviation 10, then repeatedly draws samples of size 50. The resulting bootstrap distributions, coverage simulations, and null distributions provide a clear visual explanation of how inference works in practice.
+The project uses a synthetic population with mean 50 and standard deviation 10. It repeatedly draws samples of size 50 and then uses bootstrap methods to approximate the sampling distribution of the sample mean.
 
 ## Data and Method
 
-The project uses synthetic data generated directly in R rather than an external dataset. This makes the analysis fully reproducible and easy to understand.
+The project uses simulated data generated directly in R rather than an external dataset. This keeps the workflow reproducible and easy to follow.
 
 ### Simulation setup
 
@@ -61,7 +61,7 @@ $$
 Z = \frac{\bar{X} - \mu_0}{\sigma / \sqrt{n}}
 $$
 
-The code simulates many values of Z under the null hypothesis, builds the empirical null distribution, identifies the rejection region for a two-sided 5% test, and calculates a simulated p-value for a specific observed statistic.
+The code simulates many values of Z under the null hypothesis, builds the empirical null distribution, identifies the rejection region for a two-sided 5% test, and calculates a simulated p-value for an observed statistic.
 
 This connects the concepts of:
 
@@ -93,30 +93,28 @@ Zhengyang_Ding_AEDS6400_blog8/
 
 ### Script descriptions
 
-- `code/analysis_1.R` creates the bootstrap distribution plot and saves `figure/bootstrap_distribution.png`.
+- `code/analysis_1.R` generates the bootstrap distribution plot and saves `figure/bootstrap_distribution.png`.
 - `code/analysis_2.R` simulates repeated confidence intervals and saves `figure/coverage_simulation.png`.
 - `code/analysis_3.R` simulates the null distribution, rejection region, and p-value, and saves `figure/null_distribution.png` and `figure/p_value.png`.
-- `code/interactive_bootstrap.R` builds the interactive HTML visualization saved to `figure/bootstrap_interactive.html`.
+- `code/interactive_bootstrap.R` creates the interactive HTML visualization saved to `figure/bootstrap_interactive.html`.
 
 ## Reproduction Instructions
 
-### 1. Open the project in RStudio
+### 1. Open the project in RStudio or start an R session
 
-Open the R project file:
+Clone or open the repository in RStudio. The project file `Zhengyang_Ding_AEDS6400_blog8.Rproj` is included for convenience.
 
-```r
-open Zhengyang_Ding_AEDS6400_blog8.Rproj
-```
+### 2. No manual project path update is required
 
-### 2. Update the project path if needed
+The R scripts were revised to detect the working directory automatically. They determine whether they are being run from the repository root or from the `code/` folder and then create or use the correct output directory.
 
-The script files currently include a fixed local path:
+This means the scripts are designed to work directly from the GitHub repository structure without hard-coded local paths such as:
 
 ```r
 project_path <- "D:/Rproject/6400-blog8"
 ```
 
-If your local repository is stored in a different folder, update this line in each script so it points to the folder where this project is located on your machine.
+Instead, each script uses a relative path structure that is portable across machines and GitHub repositories.
 
 ### 3. Run the analysis scripts in order
 
@@ -129,9 +127,19 @@ source("code/analysis_3.R")
 source("code/interactive_bootstrap.R")
 ```
 
+If you prefer to run them from inside the `code/` folder, you can also do:
+
+```r
+setwd("code")
+source("analysis_1.R")
+source("analysis_2.R")
+source("analysis_3.R")
+source("interactive_bootstrap.R")
+```
+
 ### 4. View the outputs
 
-The generated files will appear in the `figure/` directory:
+The generated files are saved in the `figure/` directory:
 
 - `bootstrap_distribution.png`
 - `coverage_simulation.png`
@@ -139,14 +147,16 @@ The generated files will appear in the `figure/` directory:
 - `p_value.png`
 - `bootstrap_interactive.html`
 
-Open `bootstrap_interactive.html` in a browser to explore how the bootstrap interval changes as the sample size, confidence level, number of bootstrap samples, and true mean are varied.
+Open `figure/bootstrap_interactive.html` in a browser to explore how the bootstrap interval changes as the sample size, confidence level, number of bootstrap samples, and true mean are varied.
 
 ## Expected Interpretation
 
-This project is intended to show that statistical inference is not just a set of formulas; it is a process that can be understood through repeated simulation. By generating many samples and resampling many times, we can see how uncertainty appears in the distribution of sample means and how a confidence interval or test statistic behaves under repeated sampling.
+This project is intended to show that statistical inference is not just a set of formulas; it is a process that can be understood through repeated simulation. By generating many samples and resampling them, the code helps make the logic of uncertainty visible.
 
-The key takeaway is that simulation makes the logic of statistical uncertainty visible. It helps explain why a 95% confidence interval is interpreted in terms of long-run coverage, and why a p-value measures how unusual an observed result is under a null hypothesis.
+The key takeaway is that simulation helps explain why a 95% confidence interval is interpreted in terms of long-run coverage and why a p-value is understood as a tail probability under the null hypothesis. These ideas are often abstract in symbolic form, but become much more accessible when represented through repeated simulation and visualization.
 
 ## Summary
 
-This repository demonstrates the core ideas behind statistical inference using simulation, visualization, and interactive exploration. It is a compact, reproducible example of how bootstrap resampling and null-distribution-based testing can be used to understand uncertainty in a concrete and intuitive way.
+This repository demonstrates the core ideas behind statistical inference using simulation, visualization, and interactive exploration. It is a compact, reproducible example of how bootstrap resampling and null-distribution simulations can be used to understand uncertainty in estimation and testing.
+
+The scripts are structured to run from the project repository itself, so they are well-suited for GitHub-based distribution and reproducible analysis without local machine-specific path dependencies.
